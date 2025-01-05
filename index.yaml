@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  dlibre:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2025-01-05T04:26:22.282854641Z"
+    description: Helm Chart for dlibre.com website
+    digest: 80633106787f9cd6ed0e6056a90d5e228937421560b160f13101d9b2199ac5c4
+    name: dlibre
+    type: application
+    urls:
+    - https://github.com/dlibre/charts/releases/download/dlibre-0.1.0/dlibre-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-01-05T04:26:22.282861874Z"
