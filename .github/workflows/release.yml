@@ -1,18 +1,39 @@
 name: Release Charts
 
 on:
+  pull_request:
   push:
     branches:
       - main
 
+concurrency:
+  group: charts-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Lint charts
+        run: helm lint charts/*
+
   release:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: lint
     permissions:
       contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
